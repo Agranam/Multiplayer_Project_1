@@ -6,16 +6,25 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyCharacter _enemy;
+    [SerializeField] private EnemyGun _enemyGun;
 
     private List<float> _receiveTimeIntervals = new() {0, 0, 0, 0, 0};
-    private float _lastReceiveTime;
     private Player _player;
+    private float _lastReceiveTime;
 
     public void Init(Player player)
     {
         _player = player;
         _enemy.SetSpeed(player.speed);
         player.OnChange += OnChange;
+    }
+
+    public void Shoot(in ShootInfo info)
+    {
+        Vector3 position = new Vector3(info.pX, info.pY, info.pZ);
+        Vector3 velocity = new Vector3(info.vX, info.vY, info.vZ);
+        
+        _enemyGun.Shoot(position, velocity);
     }
     
     private void SaveReceiveTime()
@@ -33,7 +42,7 @@ public class EnemyController : MonoBehaviour
         Destroy(gameObject);
     }
     
-    public void OnChange(List<DataChange> changes)
+    internal void OnChange(List<DataChange> changes)
     {
         SaveReceiveTime();
 

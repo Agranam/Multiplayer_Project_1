@@ -422,4 +422,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1353410717987090619}
-  _playerGun: {fileID: 6793052484046865895}
+  _gun: {fileID: 6793052484046865895}
